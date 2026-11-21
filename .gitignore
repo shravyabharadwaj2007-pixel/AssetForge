@@ -1,0 +1,25 @@
+
+# Node.js
+frontend/node_modules/
+frontend/dist/
+
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/**/*.pyc
+__pycache__/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
