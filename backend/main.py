@@ -1,4 +1,4 @@
-import hashlib, secrets, json
+import hashlib, secrets, json, os
 from fastapi import FastAPI, Depends, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -7,7 +7,11 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 import calc, opportunities as opp
 
 Base = declarative_base()
-engine = create_engine("sqlite:///assetforge.db", connect_args={"check_same_thread": False})
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///assetforge.db")
+
+connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+
+engine = create_engine(DATABASE_URL, connect_args=connect_args)
 Session = sessionmaker(bind=engine)
 
 class User(Base):
